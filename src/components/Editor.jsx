@@ -55,6 +55,7 @@ const Editor = (props) => {
               marginRight: 5,
               paddingBottom: 2,
               color: "#000",
+              textShadow: 4,
             }}
           >
             {props.icon}
