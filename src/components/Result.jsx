@@ -29,7 +29,7 @@ const Result = () => {
   }, [html, css, js]);
 
   return (
-    <Container style={html || css || js ? null : { background: "#444857" }}>
+    <Container style={html || css || js ? null : { background: "#f7f8fc" }}>
       <iframe
         srcDoc={src}
         title="output"
