@@ -1,46 +1,45 @@
-import React from 'react'
-import { useContext, useState, useEffect } from 'react'
-import { Box,styled } from '@mui/material'
+import { useState, useEffect, useContext } from "react";
 
-import { DataContext } from '../context/DataProvider'
+import { DataContext } from "../context/DataProvider";
 
-const Contanier = styled(Box)`
-    height = 41vh;
-`
+import { Box, styled } from "@mui/material";
+
+const Container = styled(Box)`
+  height: 41vh;
+`;
 
 const Result = () => {
+  const [src, setSrc] = useState("");
+  const { html, css, js } = useContext(DataContext);
 
-    const [src, setSrc] = useState('');
-    
-    const {html,css,js} = useContext(DataContext);
-
-    const srcCode= `
+  const srcCode = `
         <html>
             <body>${html}</body>
             <style>${css}</style>
-            <script>${js}<script/>
+            <script>${js}</script>
         </html>
-    `
-    useEffect(() => {
-        const timeout = setTimeout(()=>{
-            setSrc(srcCode);
-        }, 1000)
+    `;
 
-        return ()=> clearTimeout(timeout);
-    },[html,css,js])
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setSrc(srcCode);
+    }, 250);
+
+    return () => clearTimeout(timeout);
+  }, [html, css, js]);
 
   return (
-    <Contanier>
+    <Container style={html || css || js ? null : { background: "#444857" }}>
       <iframe
         srcDoc={src}
-        title='Output'
-        sandbox='allow-scripts'
-        frameBorder='0'
-        width='100%'
-        height='100%'
+        title="output"
+        sandbox="allow-scripts"
+        frameBorder="0"
+        width="100%"
+        height="100%"
       />
-    </Contanier>
-  )
-}
+    </Container>
+  );
+};
 
-export default Result
+export default Result;
