@@ -1,6 +1,7 @@
 .CodeMirror {
   height: 340px !important;
   color: #fff;
+  word-wrap: break-word;
 }
 
 .CodeMirror-gutters{

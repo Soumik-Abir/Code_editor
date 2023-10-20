@@ -8,8 +8,9 @@ import "codemirror/mode/css/css";
 
 import { Controlled as ControlledEditor } from "react-codemirror2";
 
-import { Box, Typography, Button, styled } from "@mui/material";
-import { CloseFullscreen } from "@mui/icons-material";
+import { Box, Typography, Button, styled, IconButton } from "@mui/material";
+import UnfoldLessIcon from '@mui/icons-material/UnfoldLess';
+import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
 
 import "../App.css";
 
@@ -19,6 +20,9 @@ const Container = styled(Box)`
   display: flex;
   flex-direction: column;
   padding: 0 8px 8px;
+  height: 100%; /* Add this line to set a fixed height */
+  overflow: auto; /* Add this line to enable scrolling */
+  width: 200px;
 `;
 
 const Header = styled(Box)`
@@ -63,11 +67,13 @@ const Editor = ({ heading, language, value, onChange, icon, color }) => {
           </Box>
           {heading}
         </Heading>
-        <CloseFullscreen
-          fontSize="small"
-          style={{ alignSelf: "center", cursor: "pointer" }}
-          onClick={() => setOpen((prevState) => !prevState)}
-        />
+        <IconButton onClick={() => setOpen(!open)}>
+          {open ? (
+            <UnfoldLessIcon style={{ color: "#aaaebc", cursor: "pointer"  }} />
+          ) : (
+            <UnfoldMoreIcon style={{ color: "#aaaebc", cursor: "pointer" }}/>
+          )}
+        </IconButton>
       </Header>
       <ControlledEditor
         onBeforeChange={handleChange}
